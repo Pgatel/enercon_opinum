@@ -31,8 +31,9 @@ class WindTurbines(object):
         if test:
             self.last_values = os.path.join(self.path, 'last_values_test.ini')
         self.config = configparser.ConfigParser()
-        logging.debug(f'Reading INI file {self.wt_path}')
-        self.config.read(self.wt_path)
+        ret = self.config.read(self.wt_path)
+        logging.debug(f'Reading INI file {self.wt_path}, {ret}')
+
         self._l_wind_turbines = self.config.get("WT", "list").split(",")
 
     @property
