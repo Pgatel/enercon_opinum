@@ -1,9 +1,11 @@
 # -*- coding: latin-1 -*-
 """
-Copyright © 2016-2020 Eole-lien SC.
+Copyright © 2016-2025 Eole-lien SC.
 All rights reserved as Copyright owner.
 
 Copyright ©
+
+Personnalisation du logging
 """
 import datetime as dt
 import logging

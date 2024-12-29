@@ -12,15 +12,20 @@ import ast
 import configparser
 import logging
 import os
+import platform
 
 
 class WindTurbines(object):
     def __init__(self, path=None, test=False):
         self._l_wind_s_wts = []
         self._lwt_ip = []
-        if path is None:
-            path = 'P:/Eole-Lien/Eolienne1/Exploitation/Enercon/opinum'
-        self.path = path
+        match platform.node():
+            case 'VINEA64' | 'MSI':
+                self.path = 'P:/Eole-Lien/Eolienne1/Exploitation/Enercon/opinum'
+                self.home = True
+            case _:
+                self.path = '.'
+                self.home = False
         self.wt_path = os.path.join(self.path, 'wind_turbines.ini')
         self.last_values = os.path.join(self.path, 'last_values.ini')
         if test:
