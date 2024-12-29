@@ -1,3 +1,12 @@
+# -*- coding: latin-1 -*-
+"""
+Copyright © 2024 Eole-lien SC.
+All rights reserved as Copyright owner.
+
+Copyright ©
+
+Outil de base pour les fichier de configuration
+"""
 
 import configparser
 

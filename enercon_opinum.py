@@ -13,9 +13,9 @@ from datetime import datetime
 
 from opinum.opinum_push import OpinumPush
 from opinum.enercon_opc_energy import EnerconOPCEnergy
-from wind_turbines import WindTurbines
 
 from tool import per_logging
+from tool.wind_turbines import WindTurbines
 
 if __name__ == "__main__":
     per_logging.add_console_handler(">Enercon Opinum<")
