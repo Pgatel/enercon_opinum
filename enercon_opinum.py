@@ -38,8 +38,9 @@ if __name__ == "__main__":
 
         energy = wt.get_energy('Temploux', opc.sum_energy)
         logging.info(f'{s_now} Produced Energy = {energy}')
-        formatted_date = s_now.replace(' ', 'T') + '+00:00'
-        opinum.push_simple('Energy', formatted_date, energy)
+        if energy >= 0:
+            formatted_date = s_now.replace(' ', 'T') + '+00:00'
+            opinum.push_simple('Energy', formatted_date, energy)
         opc.close()
         logging.info(f'{s_now} (UTC) Ending update of wind turbine energy')
     except Exception as e:

@@ -24,7 +24,7 @@ class WindTurbines(object):
                 self.path = 'P:/Eole-Lien/Eolienne1/Exploitation/Enercon/opinum'
                 self.home = True
             case _:
-                self.path = '~/enercon_opinum'
+                self.path = '/home/pascal/enercon_opinum'
                 self.home = False
         self.wt_path = os.path.join(self.path, 'wind_turbines.ini')
         self.last_values = os.path.join(self.path, 'last_values.ini')
