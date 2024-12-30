@@ -87,8 +87,11 @@ class TestWindTurbines(unittest.TestCase):
         self.assertEqual(-1, sum_energy)
         info = "{'SumEnergy': 2525}"
         self.wt.write_last_info('Temploux', info)
-        sum_energy = self.wt.get_energy('Temploux', 2530)
-        self.assertEqual(5, sum_energy)
+        energy = self.wt.get_energy('Temploux', 2530)
+        self.assertEqual(5, energy)
+        energy = self.wt.get_energy('Temploux', 2536)
+        self.assertEqual(6, energy)
+
         info = "{'SumEnergy': 1426}"
         self.wt.write_last_info('Waimes', info)
         sum_energy = self.wt.get_energy('Waimes', 1441)

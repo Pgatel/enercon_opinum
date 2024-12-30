@@ -103,7 +103,7 @@ class WindTurbines(object):
         else:
             energy = -1
 
-        self.write_energy(s_wt, energy)
+        self.write_energy(s_wt, new_sum_energy)
         logging.debug(f'Energy = {energy}')
         return energy
 
