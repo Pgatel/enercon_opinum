@@ -17,8 +17,6 @@ from pytz.exceptions import AmbiguousTimeError, NonExistentTimeError
 class OpinumPush(object):
     def __init__(self):
         self.url = 'https://push.opinum.com/api/data'
-        self.energy_id = 6126206
-        self.sum_energy_id = 6126207
         self.authorization = 'Basic cGFzY2FsLmdhdGVsbGllckB0ZW1wbG91eC5iZTpUZW1wbG91eF81MDIwMjhvcGk='
         self.headers = {'Content-Type': 'application/json',
                         'Authorization': self.authorization, }
@@ -73,21 +71,10 @@ class OpinumPush(object):
             self.zone_ambiguous = False
         return self.date_utc
 
-    def get_variable_id(self, variable: str='Energy'):
-        match variable:
-            case 'Energy':
-                variable_id = self.energy_id
-            case 'SumEnergy':
-                variable_id = self.sum_energy_id
-            case _:
-                raise Exception(f'ERR: variable type unknown {variable}')
-        return variable_id
-
-    def push(self, variable: str='Energy', l_values=None):
+    def push(self, variable_id, l_values=None):
         if l_values is None or len(l_values) == 0:
             logging.debug('ERR: Pas de valeur')
             return
-        variable_id = self.get_variable_id(variable)
         l_payload = []
         for r_value in l_values:
             value = r_value['value']
@@ -102,10 +89,9 @@ class OpinumPush(object):
         if response.status_code != 200:
             logging.debug(f'ERR: [{response.status_code}] {response.text}')
 
-    def push_simple(self, variable: str='Energy', date=None, value=None ):
+    def push_simple(self, variable_id, date=None, value=None ):
         if date is None or value is None:
             return
-        variable_id = self.get_variable_id(variable)
         value = {'VariableId': str(variable_id), "data": [{'date': date, 'value': value}]}
         payload = json.dumps([value])
         logging.debug(payload)
