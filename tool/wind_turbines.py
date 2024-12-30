@@ -32,8 +32,7 @@ class WindTurbines(object):
             self.last_values = os.path.join(self.path, 'last_values_test.ini')
         self.config = configparser.ConfigParser()
         ret = self.config.read(self.wt_path)
-        logging.debug(f'Reading INI file {self.wt_path}, {ret}')
-
+        logging.debug(f'Reading INI file {ret}')
         self._l_wind_turbines = self.config.get("WT", "list").split(",")
 
     @property
@@ -96,13 +95,12 @@ class WindTurbines(object):
 
     def get_energy(self, s_wt, new_sum_energy):
         last_sum_energy = self.get_last_sum_energy(s_wt)
-        if last_sum_energy is None:
-            return -1
-        energy = new_sum_energy - last_sum_energy
+        if last_sum_energy >= 0:
+            energy = new_sum_energy - last_sum_energy
+        else:
+            energy = -1
 
-        # écrire la nouvelle valeur dans le fichier
-        new_info = str({"SumEnergy": new_sum_energy})
-        self.write_last_info(s_wt, new_info)
+        self.write_energy(s_wt, energy)
         return energy
 
     def write_energy(self, s_wt, sum_energy):
