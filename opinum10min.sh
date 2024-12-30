@@ -1,11 +1,14 @@
 #!/bin/bash
+# Les 2 lignes suivantes sont à mettre dans crontab avec crontab -e
+# Update Opinum database every 10 minutes with SCADA data
+# */10 * * * * /home/pascal/enercon_opinum/opinum10min.sh >>/home/pascal/enercon_opinum/opinum10min.log 2>&1
 
 # Horodatage du démarrage
 echo "Enercon_opinum starting at $(date)"
 
 cd /home/pascal/enercon_opinum || exit
 
-# Commande VPN (commentée ici, assurez-vous qu'elle fonctionne si activée)
+# Le VPN vers enercon doit être ouvert (nécessairement lancé par root)
 # openconnect -q -b -u wf-08916-001 sslvpn2.enercon.de < pass.txt
 
 # Définir les noms des fichiers de log
