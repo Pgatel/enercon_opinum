@@ -87,13 +87,16 @@ class WindTurbines(object):
         try:
             info = self.read_last_info(s_wt)
             if info == '':
-                return
+                return -1
             d_info = ast.literal_eval(info)
-            return d_info.get('SumEnergy')
+            sum_energy = d_info.get('SumEnergy')
+            logging.debug(f'Sum energy = {sum_energy}')
+            return sum_energy
         except Exception as e:
             logging.warning(f'ERR: {e}')
 
     def get_energy(self, s_wt, new_sum_energy):
+        logging.debug(f'New Sum energy = {new_sum_energy}')
         last_sum_energy = self.get_last_sum_energy(s_wt)
         if last_sum_energy >= 0:
             energy = new_sum_energy - last_sum_energy
@@ -101,6 +104,7 @@ class WindTurbines(object):
             energy = -1
 
         self.write_energy(s_wt, energy)
+        logging.debug(f'Energy = {energy}')
         return energy
 
     def write_energy(self, s_wt, sum_energy):
