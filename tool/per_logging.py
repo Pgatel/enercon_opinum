@@ -14,7 +14,7 @@ import threading
 import traceback
 from logging.handlers import RotatingFileHandler
 
-from configuration import config
+from tool.configuration import config
 
 _FORMAT = '%(levelname)-8s %(asctime)s %(processName).15s %(module)50s %(message)s'
 _CSV_FORMAT = '%(levelname)s\t%(asctime)s.%(msecs)03d\t%(module)50s\t\"%(message)s\"'

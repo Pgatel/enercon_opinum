@@ -1,0 +1,8 @@
+*.xlsx
+.venv
+venv
+*.log
+gapminder2007.csv
+event_data.json
+.idea
+__pycache__
