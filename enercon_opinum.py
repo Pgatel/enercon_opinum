@@ -43,7 +43,14 @@ if __name__ == "__main__":
             logging.info(f'{s_now}    Energie produite les 10 dernières minutes = {energy} kWh')
             if energy >= 0:
                 formatted_date = s_now.replace(' ', 'T') + '+00:00'
-                opinum.push_simple(variable_id, formatted_date, energy)
+                i = 0
+                while i < 5:
+                    try:
+                        i += 1
+                        opinum.push_simple(variable_id, formatted_date, energy)
+                        break
+                    except Exception as e:
+                        logging.error(f'{s_now} ({i}) Exception {e}')
             opc.close()
             logging.info(f'{s_now} (UTC) Ending update of wind turbine energy')
         except Exception as e:
